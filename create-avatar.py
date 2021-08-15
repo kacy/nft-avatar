@@ -4,6 +4,15 @@ import random
 
 from PIL import Image
 
+bg_colors = [
+	(105,210,231,255),
+	(167,219,216,255),
+	(224,228,204,255),
+	(243,134,48,255),
+	(250,105,0,255),
+]
+
+base = Image.open("images/base.png")
 
 mouth_list = [
 	"images/mouth-smile.png",
@@ -38,20 +47,24 @@ parser.add_argument("--preview", help="do you want the preview?",
 args = parser.parse_args()
 
 for i in range(0, args.integers):
-	background = Image.open("images/base.png")
-	mouth_chosen = random.randint(0, len(mouth_list) - 1)
-	hat_chosen = random.randint(0, len(hat_list) - 1)
-	bottom_chosen = random.randint(0, len(bottom_list) - 1)
+	mouth_index = random.randint(0, len(mouth_list) - 1)
+	hat_index = random.randint(0, len(hat_list) - 1)
+	bottom_index = random.randint(0, len(bottom_list) - 1)
+	bg_index = random.randint(0, len(bg_colors) - 1)
 
-	mouth = Image.open(mouth_list[mouth_chosen])
+	background = Image.new('RGBA', (800,800), bg_colors[bg_index])
+
+	background.paste(base , (0,0), base)
+
+	mouth = Image.open(mouth_list[mouth_index])
 	background.paste(mouth, (0, 0), mouth)
 
-	if hat_chosen != 0:
-		hat = Image.open(hat_list[hat_chosen])
+	if hat_index != 0:
+		hat = Image.open(hat_list[hat_index])
 		background.paste(hat, (0, 0), hat)
 
-	if bottom_chosen != 0:
-		bottom = Image.open(bottom_list[bottom_chosen])
+	if bottom_index != 0:
+		bottom = Image.open(bottom_list[bottom_index])
 		background.paste(bottom, (0, 0), bottom)
 	
 	if args.preview:
