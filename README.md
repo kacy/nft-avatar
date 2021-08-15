@@ -1,3 +1,5 @@
+![Preview](images/readme-row.png)
+
 *Just playing around here. I wanted to see how randomly layered NFTs were generated.*
 
 ### Installation
