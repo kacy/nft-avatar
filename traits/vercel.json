@@ -1,3 +1,6 @@
 {
-  "cleanUrls": true
+    "routes": [
+        { "src": "/", "dest": "http://google.com" },
+        { "src": "/(?<id>[^/]*)", "dest": "/$id.json" }
+    ]
 }
